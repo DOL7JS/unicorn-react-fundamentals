@@ -1,4 +1,6 @@
 import "./App.css";
+import StudentList from "./bricks/StudentList";
+import ClassroomInfo from "./bricks/ClassroomInfo";
 
 const classroom = {
   name: "Septima",
@@ -35,23 +37,12 @@ const studentList = [
   },
 ];
 
-function getStudentList(studentList) {
-  return studentList.map((student) => {
-    return (
-      <div key={student.id}>
-        <div>{student.firstname}</div>
-        <div>{student.surname}</div>
-        <div>{student.nationalId}</div>
-      </div>
-    );
-  });
-}
 
 function App() {
   return (
     <div className="App">
-      <h1>Classroom {classroom.name}</h1>
-      {getStudentList(studentList)}
+      <ClassroomInfo classroom={classroom} />
+      <StudentList studentList={studentList}/>
     </div>
   );
 }
