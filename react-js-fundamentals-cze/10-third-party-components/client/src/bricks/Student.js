@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "react-bootstrap/Card"; // import komponenty Card
-import Icon from '@mdi/react' // komponenta, kterou budeme používat pro zobrazení ikony
-import { mdiAccountSchoolOutline, mdiIdentifier } from '@mdi/js' // ikony, které chceme využít
+import Card from "react-bootstrap/Card";
+import Icon from '@mdi/react'
+import { mdiAccountSchoolOutline, mdiIdentifier } from '@mdi/js'
 class Student extends React.Component {
   render() {
     return (
