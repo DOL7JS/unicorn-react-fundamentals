@@ -2,6 +2,7 @@
 .recipeList {
     display: grid;
     grid-template-columns: auto auto auto;
+    justify-content: center;
 }
 
 .recipe{
