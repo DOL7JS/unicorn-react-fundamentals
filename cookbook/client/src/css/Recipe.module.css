@@ -1,8 +1,7 @@
 
 .recipeList {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 
 .recipe{
