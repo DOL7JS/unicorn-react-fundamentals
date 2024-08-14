@@ -1,4 +1,5 @@
 
+
 .recipeList {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -15,12 +16,21 @@
     padding: 10px;
     transition: box-shadow 0.3s ease;
 }
+.descriptionSmall{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.description{
+    text-align: left;
+}
+
 .recipe:hover {
     box-shadow:  7px 7px rgba(0, 0, 0, 0.2);
 }
 .recipeTitle{
     text-decoration: darkgray wavy underline;
-    height: 50px;
+    height: 70px;
 }
 .recipeContainer{
     display: flex;
@@ -38,4 +48,8 @@ img {
 
 img:hover {
     transform:scale(1.2);
+}
+.recipeSmall{
+    overflow: hidden;
+    height: 580px;
 }
