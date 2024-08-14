@@ -3,9 +3,8 @@ import './App.css';
 import Header from "./components/Header";
 import RecipeList from "./components/RecipesList";
 import {useEffect, useState} from "react";
-import Icon from "@mdi/react";
-import {mdiLoading} from "@mdi/js";
-import styles from "./css/States.module.css";
+import {getErrorPage, getPendingPage} from "./utils/Common";
+import {fetchIngredientList, fetchRecipeList} from "./utils/Connection";
 
 function App() {
     const [recipeLoadCall, setRecipeLoadCall] = useState({
@@ -16,43 +15,19 @@ function App() {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:3000/recipe/list`, {
-            method: "GET",
-        }).then(async (response) => {
-            const responseJson = await response.json();
-            if (response.status >= 400) {
-                setRecipeLoadCall({state: "error", error: responseJson});
-            } else {
-                setRecipeLoadCall({state: "success", data: responseJson});
-            }
-        });
-        fetch(`http://localhost:3000/ingredient/list`, {
-            method: "GET",
-        }).then(async (response) => {
-            const responseJson = await response.json();
-            if (response.status >= 400) {
-                setIngredientLoadCall({state: "error", error: responseJson});
-            } else {
-                setIngredientLoadCall({state: "success", data: responseJson});
-            }
-        });
+        fetchRecipeList(setRecipeLoadCall);
+        fetchIngredientList(setIngredientLoadCall);
     }, []);
+
 
     function getContent() {
         const pendingRequest = recipeLoadCall.state === 'pending' || ingredientLoadCall.state === 'pending';
         const successRequest = recipeLoadCall.state === 'success' && ingredientLoadCall.state === 'success';
-        const errorRequest = recipeLoadCall.state === 'error' || ingredientLoadCall.state === 'error';
+        const   errorRequest = recipeLoadCall.state === 'error' || ingredientLoadCall.state === 'error';
         if (errorRequest) {
-            return (
-                <div className={styles.error}>
-                    <div>Nepodařilo se načíst data o receptech.</div>
-                    <br/>
-                    <pre>{JSON.stringify(recipeLoadCall.error, null, 2)}</pre>
-                </div>);
+            return getErrorPage(recipeLoadCall);
         } else if (pendingRequest) {
-            return (<div className={styles.loading}>
-                <Icon size={2} path={mdiLoading} spin={true}/>
-            </div>);
+            return getPendingPage();
         } else if (successRequest) {
             return (<>
                 <Header title={"Best recipes in Unicorn"}/>

@@ -1,4 +1,3 @@
-
 import {Button, Form, Navbar} from "react-bootstrap";
 import Icon from "@mdi/react";
 import {mdiMagnify, mdiMinus, mdiPlus} from "@mdi/js";
@@ -33,60 +32,60 @@ function RecipesList(props) {
             );
         });
     }, [searchBy]);
-    const searchFormStyle = "d-flex".concat(' ',headerStyle.form);
-    return (
-        <>
-            <Navbar bg="light" expand={'s'}>
-                <Form inline className={searchFormStyle} onSubmit={handleSearch}>
-                    <Form.Control
-                        id={"searchInput"}
-                        style={{maxWidth: "150px"}}
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                        onChange={handleSearchDelete}
-                    />
-                    <Button
-                        style={{marginRight: "8px"}}
-                        variant="outline-success"
-                        type="submit"
-                    >
-                        <Icon size={1} path={mdiMagnify}/>
-                    </Button>
-                </Form>
-                <Form inline className={headerStyle.form}>
-                    {!isAdmin &&
-                        <Button className={headerStyle.form}
+
+    function getSearchBar() {
+        const searchFormStyle = "d-flex".concat(' ',headerStyle.form);
+        return <>
+            <Form inline className={searchFormStyle} onSubmit={handleSearch}>
+                <Form.Control
+                    id={"searchInput"}
+                    style={{maxWidth: "150px"}}
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    onChange={handleSearchDelete}/>
+                <Button
+                    style={{marginRight: "8px"}}
+                    variant="outline-success"
+                    type="submit">
+                    <Icon size={1} path={mdiMagnify}/>
+                </Button>
+            </Form>
+        </>;
+    }
+
+    function getMenuBar() {
+        return <>
+            <Form inline className={headerStyle.form}>
+                {!isAdmin &&
+                    <Button className={headerStyle.form}
                             variant="outline-primary"
-                            onClick={() =>
-                                setViewType((currentState) => {
-                                    if (currentState === "grid") return "table";
-                                    else return "grid";
-                                })
-                            }
-                        >
-                            <Icon size={1} path={isGrid ? mdiPlus : mdiMinus}/>{" "}
-                        </Button>}
+                            onClick={() => setViewType((currentState) => {
+                                return currentState === "grid" ? "table" : "grid";
+                            })}>
+                        <Icon size={1} path={isGrid ? mdiPlus : mdiMinus}/>{" "}
+                    </Button>}
 
                     <Button
                         variant="outline-primary"
-                        onClick={() =>
-                            setIsAdmin((currentState) => {
-                                return !currentState
-                            })
-                        }
-                    >
-                        {isAdmin ? 'Admin view' : 'User view'}
+                        onClick={() => setIsAdmin((currentState) => {
+                            return !currentState
+                        })}>
+                        {isAdmin ? 'User view' : 'Admin view'}
                     </Button>
-                </Form>
+            </Form></>;
+    }
+    return (
+        <>
+            <Navbar bg="light" expand={'s'}>
+                {getSearchBar()}
+                {getMenuBar()}
             </Navbar>
-
             <div className={recipeStyle.recipeList}>
                 {isAdmin ?
                     (<RecipeTableList recipeList={filteredRecipeList} isSmallView={isGrid}/>) :
                     (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
                                      isSmallView={isGrid}/>)}
-
             </div>
         </>
     );

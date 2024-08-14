@@ -1,4 +1,6 @@
-
+.ingredientButton {
+    margin: 10px;
+}
 
 .recipeList {
     display: grid;

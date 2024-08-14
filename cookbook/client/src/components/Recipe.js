@@ -8,24 +8,33 @@ import {useState} from "react";
 
 function Recipe(props) {
 
-    const className = props.isSmallView ? recipeStyle.recipe.concat(' ', recipeStyle.recipeSmall) : recipeStyle.recipe;
+    const cardStyle = props.isSmallView ? recipeStyle.recipe.concat(' ', recipeStyle.recipeSmall) : recipeStyle.recipe;
     const descriptionStyle = props.isSmallView ? recipeStyle.description.concat(' ', recipeStyle.descriptionSmall) : recipeStyle.description;
     const [showIngredients, setShowIngredients] = useState(false);
     const buttonStyle = showIngredients ? "btn-secondary" : "btn-primary";
+
+    function getIngredientsButton() {
+        return <>{!props.isSmallView &&
+            <Button className={recipeStyle.ingredientButton.concat(' ', buttonStyle)} onClick={() => {
+                setShowIngredients((current) => !current)
+            }}>Ingredience</Button>}
+
+        </>;
+    }
+
+    function getIngredients() {
+        return <>{(showIngredients || props.isSmallView) &&
+            <IngredientList ingredients={props.ingredients}></IngredientList>}</>;
+    }
     return (
-        <Card className={className}>
+        <Card className={cardStyle}>
             <Card.Body className={recipeStyle.recipeColumn}>
                 <Icon path={mdiFoodForkDrink} size={1}/>
-                <h3 className={recipeStyle.recipeTitle}>{props.recipe.name}</h3>
-                <img src={props.recipe.imgUri} alt={props.recipe.name}></img>
-                <p className={descriptionStyle}>{props.recipe.description}</p>
-                {!props.isSmallView &&
-                    <Button className={buttonStyle} onClick={() => {
-                        setShowIngredients((current) => !current)
-                    }}>Ingredience</Button>}
-                {(showIngredients || props.isSmallView) &&
-                    <IngredientList ingredients={props.ingredients}></IngredientList>}
-
+                <Card.Title className={recipeStyle.recipeTitle}>{props.recipe.name}</Card.Title>
+                <Card.Img src={props.recipe.imgUri} alt={props.recipe.name}></Card.Img>
+                {getIngredientsButton()}
+                <Card.Text className={descriptionStyle}>{props.recipe.description}</Card.Text>
+                {getIngredients()}
             </Card.Body>
         </Card>
     );
