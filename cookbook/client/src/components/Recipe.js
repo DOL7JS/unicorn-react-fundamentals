@@ -23,8 +23,13 @@ function Recipe(props) {
     }
 
     function getIngredients() {
-        return <>{(showIngredients || props.isSmallView) &&
-            <IngredientList ingredients={props.ingredients}></IngredientList>}</>;
+        return (showIngredients || props.isSmallView) &&
+            <>
+                {!props.isSmallView && <hr></hr>}
+                {(showIngredients || props.isSmallView) &&
+                    <IngredientList ingredients={props.ingredients}></IngredientList>}
+
+            </>;
     }
     return (
         <Card className={cardStyle}>
