@@ -2,10 +2,14 @@
     margin: 10px;
 }
 
+.recipeListSmall {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
 .recipeList {
     display: grid;
     grid-template-columns: auto auto auto;
-    justify-content: center;
 }
 
 .recipe{
@@ -13,10 +17,10 @@
     flex-direction: column;
     border-style: double;
     border-radius: 10px;
-    width: 400px;
-    margin: 10px 0 0 10px;
+    margin: 10px 10px 0 10px;
     padding: 10px;
     transition: box-shadow 0.3s ease;
+    max-width: 500px;
 }
 .descriptionSmall{
     white-space: nowrap;
@@ -53,5 +57,6 @@ img:hover {
 }
 .recipeSmall{
     overflow: hidden;
-    height: 580px;
+    height: 450px;
+    width: auto;
 }

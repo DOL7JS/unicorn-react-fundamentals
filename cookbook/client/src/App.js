@@ -23,7 +23,7 @@ function App() {
     function getContent() {
         const pendingRequest = recipeLoadCall.state === 'pending' || ingredientLoadCall.state === 'pending';
         const successRequest = recipeLoadCall.state === 'success' && ingredientLoadCall.state === 'success';
-        const   errorRequest = recipeLoadCall.state === 'error' || ingredientLoadCall.state === 'error';
+        const errorRequest = recipeLoadCall.state === 'error' || ingredientLoadCall.state === 'error';
         if (errorRequest) {
             return getErrorPage(recipeLoadCall);
         } else if (pendingRequest) {

@@ -8,18 +8,22 @@ import recipeStyle from "../css/Recipe.module.css"
 import headerStyle from "../css/Header.module.css"
 
 function RecipesList(props) {
-    const [viewType, setViewType] = useState("grid");
-    const isGrid = viewType === "grid";
+    const [smallView, setSmallView] = useState(true);
     const [searchBy, setSearchBy] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
 
     function handleSearch(event) {
         event.preventDefault();
         setSearchBy(event.target["searchInput"].value);
+        if (event.target["searchInput"].value) {
+            setSmallView(false);
+        }
     }
 
     function handleSearchDelete(event) {
-        if (!event.target.value) setSearchBy("");
+        if (!event.target.value) {
+            setSearchBy("");
+        }
     }
 
     const filteredRecipeList = useMemo(() => {
@@ -35,8 +39,7 @@ function RecipesList(props) {
 
     function getSearchBar() {
         const searchFormStyle = "d-flex".concat(' ',headerStyle.form);
-        return <>
-            <Form inline className={searchFormStyle} onSubmit={handleSearch}>
+        return (<Form inline className={searchFormStyle} onSubmit={handleSearch}>
                 <Form.Control
                     id={"searchInput"}
                     style={{maxWidth: "150px"}}
@@ -50,20 +53,20 @@ function RecipesList(props) {
                     type="submit">
                     <Icon size={1} path={mdiMagnify}/>
                 </Button>
-            </Form>
-        </>;
+        </Form>);
     }
 
     function getMenuBar() {
-        return <>
-            <Form inline className={headerStyle.form}>
+        return <Form inline className={headerStyle.form}>
                 {!isAdmin &&
                     <Button className={headerStyle.form}
+                            disabled={searchBy}
                             variant="outline-primary"
-                            onClick={() => setViewType((currentState) => {
-                                return currentState === "grid" ? "table" : "grid";
+                            onClick={() => setSmallView((currentState) => {
+                                console.log(!currentState)
+                                return !currentState;
                             })}>
-                        <Icon size={1} path={isGrid ? mdiPlus : mdiMinus}/>{" "}
+                        <Icon size={1} path={smallView ? mdiPlus : mdiMinus}/>{" "}
                     </Button>}
 
                     <Button
@@ -73,19 +76,21 @@ function RecipesList(props) {
                         })}>
                         {isAdmin ? 'User view' : 'Admin view'}
                     </Button>
-            </Form></>;
+        </Form>;
     }
+
+    const recipeListStyle = smallView ? recipeStyle.recipeListSmall : recipeStyle.recipeList;
     return (
         <>
             <Navbar bg="light" expand={'s'}>
                 {getSearchBar()}
                 {getMenuBar()}
             </Navbar>
-            <div className={recipeStyle.recipeList}>
+            <div className={recipeListStyle}>
                 {isAdmin ?
-                    (<RecipeTableList recipeList={filteredRecipeList} isSmallView={isGrid}/>) :
+                    (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}/>) :
                     (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
-                                     isSmallView={isGrid}/>)}
+                                     isSmallView={smallView}/>)}
             </div>
         </>
     );
