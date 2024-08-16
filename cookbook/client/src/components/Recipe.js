@@ -2,7 +2,7 @@ import {Button, Card} from "react-bootstrap";
 import recipeStyle from "../css/Recipe.module.css"
 import Icon from "@mdi/react";
 import {mdiFoodForkDrink} from "@mdi/js";
-import IngredientList from "./Ingredient";
+import IngredientList from "./IngredientList";
 import {useState} from "react";
 
 
@@ -23,13 +23,16 @@ function Recipe(props) {
     }
 
     function getIngredients() {
-        return (showIngredients || props.isSmallView) &&
-            <>
-                {!props.isSmallView && <hr></hr>}
-                {(showIngredients || props.isSmallView) &&
-                    <IngredientList ingredients={props.ingredients}></IngredientList>}
+        if (!showIngredients && !props.isSmallView) {
+            return null;
+        }
 
-            </>;
+        return (
+            <>
+                {!props.isSmallView && <hr />}
+                <IngredientList ingredients={props.ingredients} />
+            </>
+        );
     }
     return (
         <Card className={cardStyle}>

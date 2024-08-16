@@ -5,7 +5,7 @@ function IngredientList(props) {
 
     return (<ul className={ingredientStyle.ingredientList}>
             {props.ingredients.map((ingr) => {
-                return <li>{ingr.name} - {ingr.amount} {ingr.unit}</li>
+                return <li key={ingr.id}>{ingr.name} - {ingr.amount} {ingr.unit}</li>
             })}
         </ul>
     );
