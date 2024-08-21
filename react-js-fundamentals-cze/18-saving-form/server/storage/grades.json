@@ -3298,5 +3298,15 @@
     "subjectId": "495a2f53e28edd18",
     "classroomId": "84d4e4261f30a2e5",
     "id": "ce7745e98fc04b0c"
+  },
+  {
+    "description": "Jedna",
+    "dateTs": "2024-08-21",
+    "grade": 1,
+    "weight": 1,
+    "studentId": "573aaf0225b01132",
+    "subjectId": "ae3f5077053c5579",
+    "classroomId": "84d4e4261f30a2e5",
+    "id": "ae4823761782327c"
   }
 ]

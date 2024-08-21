@@ -4,7 +4,6 @@ import {mdiMagnify, mdiMinus, mdiPlus} from "@mdi/js";
 import {useMemo, useState} from "react";
 import RecipeTableList from "./RecipeTableList";
 import RecipeGridList from "./RecipeGridList";
-import recipeStyle from "../css/Recipe.module.css"
 import headerStyle from "../css/Header.module.css"
 
 function RecipesList(props) {
@@ -42,7 +41,6 @@ function RecipesList(props) {
         return (<Form inline className={searchFormStyle} onSubmit={handleSearch}>
                 <Form.Control
                     id={"searchInput"}
-                    style={{maxWidth: "150px"}}
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
@@ -57,19 +55,31 @@ function RecipesList(props) {
     }
 
     function getMenuBar() {
-        return <Form inline className={headerStyle.form}>
+        return <Form inline className={headerStyle.form.concat(' ', "d-flex")}>
                 {!isAdmin &&
-                    <Button className={headerStyle.form}
+                    <><Button
+                        style={{marginTop: "10px"}}
+                        className={"w-100 d-sm-none"}
+                        disabled={searchBy}
+                        variant="outline-primary"
+                        onClick={() => setSmallView((currentState) => {
+                            return !currentState;
+                        })}>
+                        <Icon size={1} path={smallView ? mdiPlus : mdiMinus}/>{" "}
+                    </Button>
+                        <Button
+                            style={{marginRight: "10px"}}
+                            className={"d-none d-sm-block"}
                             disabled={searchBy}
                             variant="outline-primary"
                             onClick={() => setSmallView((currentState) => {
-                                console.log(!currentState)
                                 return !currentState;
                             })}>
                         <Icon size={1} path={smallView ? mdiPlus : mdiMinus}/>{" "}
-                    </Button>}
+                        </Button></>}
 
                     <Button
+                        className={"d-none d-md-block"}
                         variant="outline-primary"
                         onClick={() => setIsAdmin((currentState) => {
                             return !currentState
@@ -79,21 +89,30 @@ function RecipesList(props) {
         </Form>;
     }
 
-    const recipeListStyle = smallView ? recipeStyle.recipeListSmall : recipeStyle.recipeList;
     return (
         <>
-            <Navbar bg="light" expand={'s'}>
+            <Navbar bg="light" collapseOnSelect expand="sm">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                <Navbar.Collapse style={{justifyContent: "space-between"}}>
                 {getSearchBar()}
                 {getMenuBar()}
+                </Navbar.Collapse>
             </Navbar>
-            <div className={recipeListStyle}>
-                {isAdmin ?
-                    (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}/>) :
-                    (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
-                                     isSmallView={smallView}/>)}
+            <div className="container">
+                <div className={"d-block d-md-none"}>
+                    <RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
+                                    isSmallView={smallView}/>
+                </div>
+                <div className={"d-none d-md-block"}>
+                    {isAdmin ?
+                        (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}/>) :
+                        (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
+                                         isSmallView={smallView}/>)}
+                </div>
             </div>
         </>
-    );
+    )
+        ;
 }
 
 export default RecipesList;

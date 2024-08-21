@@ -2,16 +2,6 @@
     margin: 10px;
 }
 
-.recipeListSmall {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-}
-
-.recipeList {
-    display: grid;
-    grid-template-columns: auto auto auto;
-}
-
 .recipe{
     display: flex;
     flex-direction: column;

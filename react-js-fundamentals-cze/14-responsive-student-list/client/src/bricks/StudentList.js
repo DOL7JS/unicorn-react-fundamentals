@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, {useMemo, useState} from "react";
 import StudentGridList from "./StudentGridList";
 import StudentTableList from "./StudentTableList";
 
@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import Icon from "@mdi/react";
-import { mdiTable, mdiViewGridOutline, mdiMagnify } from "@mdi/js";
+import {mdiMagnify, mdiTable, mdiViewGridOutline} from "@mdi/js";
 import styles from "../css/studentList.module.css";
 
 function StudentList(props) {
@@ -37,9 +37,11 @@ function StudentList(props) {
 
   return (
     <div>
-      <Navbar bg="light">
+      <Navbar collapseOnSelect expand="sm" bg="light">
         <div className="container-fluid">
           <Navbar.Brand>Seznam studentů</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+          <Navbar.Collapse style={{justifyContent: "right"}}>
           <div>
             <Form className="d-flex" onSubmit={handleSearch}>
               <Form.Control
@@ -69,21 +71,29 @@ function StudentList(props) {
                 <Icon size={1} path={isGrid ? mdiTable : mdiViewGridOutline} />{" "}
                 {isGrid ? "Tabulka" : "Grid"}
               </Button>
+
             </Form>
           </div>
+          </Navbar.Collapse>
         </div>
       </Navbar>
       <div className={styles.studentList}>
         {filteredStudentList.length ? (
-          isGrid ? (
-            <StudentGridList studentList={filteredStudentList} />
-          ) : (
-            <StudentTableList studentList={filteredStudentList} />
-          )
-        ) : (
-          <div style={{ margin: "16px auto", textAlign: "center" }}>
-            Nejsou žádní studenti ke zobrazení
-          </div>
+            <div className="container">
+              <div className={"d-block d-md-none"}>
+                <StudentGridList studentList={filteredStudentList}/>
+              </div>
+              <div className={"d-none d-md-block"}>
+                {isGrid ? (
+                    <StudentGridList studentList={filteredStudentList}/>
+                ) : (
+                    <StudentTableList studentList={filteredStudentList}/>
+                )}
+              </div>
+            </div>) : (
+            <div style={{margin: "16px auto", textAlign: "center"}}>
+              Nejsou žádní studenti ke zobrazení
+            </div>
         )}
       </div>
     </div>

@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Modal, Form, Button, Row, Col } from "react-bootstrap";
+import {useState} from "react";
+import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 
 export default function StudentGradeForm({ student, subject, show, setAddGradeShow }) {
+  const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState({
     description: "",
     dateTs: new Date().toISOString().substring(0, 10),
@@ -20,6 +21,7 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
   };
 
   const handleSubmit = async (e) => {
+    const form = e.currentTarget;
     e.preventDefault();
     e.stopPropagation();
 
@@ -28,14 +30,17 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
       studentId: student.id,
       subjectId: subject.id,
     };
-
+    if (!form.checkValidity()) {
+      setValidated(true);
+      return;
+    }
     console.log(payload);
   };
 
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Form onSubmit={(e) => handleSubmit(e)}>
+        <Form noValidate validated={validated} onSubmit={(e) => handleSubmit(e)}>
           <Modal.Header closeButton>
             <Modal.Title>Přidat známku</Modal.Title>
           </Modal.Header>
@@ -49,7 +54,12 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
                 type="text"
                 value={formData.description}
                 onChange={(e) => setField("description", e.target.value)}
+                maxLength={20}
+                required
               />
+              <Form.Control.Feedback type="invalid">
+                Zadejte popis s maximální délkou 20 znaků
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Row>
@@ -60,6 +70,9 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
                   placeholder="1-5"
                   value={formData.grade}
                   onChange={(e) => setField("grade", parseInt(e.target.value))}
+                  min={1}
+                  max={5}
+                  required
                 />
               </Form.Group>
 
@@ -68,6 +81,7 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
                 <Form.Select
                   value={formData.weight}
                   onChange={(e) => setField("weight", Number(e.target.value))}
+                  required
                 >
                   <option value="" disabled>
                     Váha známky
@@ -85,6 +99,7 @@ export default function StudentGradeForm({ student, subject, show, setAddGradeSh
                 type="date"
                 value={formData.dateTs}
                 onChange={(e) => setField("dateTs", e.target.value)}
+                required
               />
             </Form.Group>
           </Modal.Body>
