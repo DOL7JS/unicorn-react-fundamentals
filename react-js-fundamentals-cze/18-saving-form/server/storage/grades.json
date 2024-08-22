@@ -3308,5 +3308,15 @@
     "subjectId": "ae3f5077053c5579",
     "classroomId": "84d4e4261f30a2e5",
     "id": "ae4823761782327c"
+  },
+  {
+    "description": "aaa",
+    "dateTs": "2024-08-22",
+    "grade": 1,
+    "weight": 0.5,
+    "studentId": "9c939e35da27a672",
+    "subjectId": "e3c7b689a47e76b0",
+    "classroomId": "84d4e4261f30a2e5",
+    "id": "4dfed9ea3b7d2cec"
   }
 ]

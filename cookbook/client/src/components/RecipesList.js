@@ -11,8 +11,13 @@ function RecipesList(props) {
     const [smallView, setSmallView] = useState(true);
     const [searchBy, setSearchBy] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
-    const [addRecipeShow, setAddRecipeShow] = useState(false);
-    const handleAddRecipeShow = () => setAddRecipeShow(true);
+    const [addRecipeShow, setAddRecipeShow] = useState({
+        state: false
+    });
+    const handleAddRecipeShow = (data) => {
+        console.log(data);
+        setAddRecipeShow({state: true, data: data})
+    };
 
     function handleSearch(event) {
         event.preventDefault();
@@ -37,7 +42,7 @@ function RecipesList(props) {
                 recipe.description.toLocaleLowerCase().includes(searchBy.toLocaleLowerCase())
             );
         });
-    }, [searchBy]);
+    }, [searchBy, props.recipeList]);
 
     function getSearchBar() {
         const searchFormStyle = "d-flex".concat(' ',headerStyle.form);
@@ -63,7 +68,7 @@ function RecipesList(props) {
                 style={{float: "right"}}
                 variant="secondary"
                 class="btn btn-success btn-sm"
-                onClick={handleAddRecipeShow}
+                onClick={() => handleAddRecipeShow(null)}
             >
                 <Icon path={mdiPlus} size={1}/>
                 Recipe
@@ -108,12 +113,15 @@ function RecipesList(props) {
                 <Navbar.Collapse style={{justifyContent: "space-between"}}>
                 {getSearchBar()}
                 {getMenuBar()}
+
                 </Navbar.Collapse>
             </Navbar>
             <RecipeForm
-                show={addRecipeShow}
+                show={addRecipeShow.state}
                 setAddRecipeShow={setAddRecipeShow}
                 ingredients={props.ingredientList}
+                onComplete={props.onComplete}
+                recipe={addRecipeShow.data}
             ></RecipeForm>
             <div className="container">
                 <div className={"d-block d-md-none"}>
@@ -124,7 +132,7 @@ function RecipesList(props) {
                     {isAdmin ?
                         (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}/>) :
                         (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
-                                         isSmallView={smallView}/>)}
+                                         isSmallView={smallView} onEdit={handleAddRecipeShow}/>)}
                 </div>
             </div>
         </>

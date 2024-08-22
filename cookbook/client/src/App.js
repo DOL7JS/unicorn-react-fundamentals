@@ -19,7 +19,18 @@ function App() {
         fetchIngredientList(setIngredientLoadCall);
     }, []);
 
-
+    const handleRecipeAdded = (recipe) => {
+        if (recipeLoadCall.state === "success") {
+            let recipeList = [...recipeLoadCall.data];
+            if (recipe.id) {
+                recipeList = recipeList.filter((r) => r.id !== recipe.id);
+            }
+            setRecipeLoadCall({
+                state: "success",
+                data: [...recipeList, recipe]
+            });
+        }
+    }
     function getContent() {
         const pendingRequest = recipeLoadCall.state === 'pending' || ingredientLoadCall.state === 'pending';
         const successRequest = recipeLoadCall.state === 'success' && ingredientLoadCall.state === 'success';
@@ -31,7 +42,8 @@ function App() {
         } else if (successRequest) {
             return (<>
                 <Header title={"Best recipes in Unicorn"}/>
-                <RecipeList recipeList={recipeLoadCall.data} ingredientList={ingredientLoadCall.data}/>
+                <RecipeList onComplete={handleRecipeAdded} recipeList={recipeLoadCall.data}
+                            ingredientList={ingredientLoadCall.data}/>
             </>);
         }
         return null;

@@ -1,7 +1,7 @@
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import recipeStyle from "../css/Recipe.module.css"
 import Icon from "@mdi/react";
-import {mdiFoodForkDrink} from "@mdi/js";
+import {mdiFoodForkDrink, mdiPencilOutline} from "@mdi/js";
 import IngredientList from "./IngredientList";
 import {useState} from "react";
 
@@ -37,7 +37,22 @@ function Recipe(props) {
     return (
         <Card className={cardStyle}>
             <Card.Body className={recipeStyle.recipeColumn}>
-                <Icon path={mdiFoodForkDrink} size={1}/>
+                <Row>
+                    <Col>
+                        <Icon path={mdiFoodForkDrink} size={1}/>
+                    </Col>
+                    <Col>
+                        <Icon
+                            size={0.8}
+                            path={mdiPencilOutline}
+                            style={{color: 'orange', cursor: 'pointer'}}
+                            onClick={(e) => {
+                                props.onEdit(props.recipe)
+                                console.log(props.recipe)
+                            }}
+                        /> </Col>
+                </Row>
+
                 <Card.Title className={recipeStyle.recipeTitle}>{props.recipe.name}</Card.Title>
                 <Card.Img src={props.recipe.imgUri} alt={props.recipe.name}></Card.Img>
                 {getIngredientsButton()}
