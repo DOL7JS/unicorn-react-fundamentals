@@ -5,11 +5,14 @@ import {useMemo, useState} from "react";
 import RecipeTableList from "./RecipeTableList";
 import RecipeGridList from "./RecipeGridList";
 import headerStyle from "../css/Header.module.css"
+import RecipeForm from "./RecipeForm";
 
 function RecipesList(props) {
     const [smallView, setSmallView] = useState(true);
     const [searchBy, setSearchBy] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
+    const [addRecipeShow, setAddRecipeShow] = useState(false);
+    const handleAddRecipeShow = () => setAddRecipeShow(true);
 
     function handleSearch(event) {
         event.preventDefault();
@@ -56,6 +59,15 @@ function RecipesList(props) {
 
     function getMenuBar() {
         return <Form inline className={headerStyle.form.concat(' ', "d-flex")}>
+            <Button
+                style={{float: "right"}}
+                variant="secondary"
+                class="btn btn-success btn-sm"
+                onClick={handleAddRecipeShow}
+            >
+                <Icon path={mdiPlus} size={1}/>
+                Recipe
+            </Button>
                 {!isAdmin &&
                     <><Button
                         style={{marginTop: "10px"}}
@@ -98,6 +110,11 @@ function RecipesList(props) {
                 {getMenuBar()}
                 </Navbar.Collapse>
             </Navbar>
+            <RecipeForm
+                show={addRecipeShow}
+                setAddRecipeShow={setAddRecipeShow}
+                ingredients={props.ingredientList}
+            ></RecipeForm>
             <div className="container">
                 <div className={"d-block d-md-none"}>
                     <RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
