@@ -5,7 +5,7 @@ function RecipeGridList(props) {
     return (
         <div className="row">
             {props.recipeList.map((recipe) => {
-        const mergedIngredients = recipe.ingredients.map(ingredient => {
+                const mergedIngredients = recipe.ingredients.map(ingredient => {
             const matchedIngredient = props.ingredientList.find(i => i.id === ingredient.id);
             return {
                 ...ingredient,

@@ -11,10 +11,7 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
         name: "",
         description: ""
     });
-    const [recipeFormData, setRecipeFormData] = useState({
-        name: "",
-        description: ""
-    });
+    const [recipeFormData, setRecipeFormData] = useState(defaultFormData);
     const [addRecipeCall, setAddRecipeCall] = useState({
         state: 'inactive'
     });
@@ -56,9 +53,10 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
         if (recipe) {
             console.log(recipe)
             setRecipeFormData({name: recipe.name, description: recipe.description})
+            setIngredientsFormData(recipe.ingredients)
+            setNoIngredients(recipe.ingredients?.length > 0 ? recipe.ingredients?.length : noIngredients)
         } else {
             console.log('NOT RECIPE')
-            setRecipeFormData(defaultFormData);
         }
     }, [recipe]);
     const ingredientList = () => {
@@ -72,6 +70,7 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
                             as="select"
                             type={"select"}
                             minLength={1}
+                            value={ingredientsFormData[i]?.id}
                             required
                             onChange={(e) => setIngredientField(i, "id", e.target.value)}
                         >
@@ -93,7 +92,7 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
                             required
                             type="number"
                             min={0}
-                            value={ingredientsFormData.amount}
+                            value={ingredientsFormData[i]?.amount}
                             onChange={(e) => setIngredientField(i, "amount", parseInt(e.target.value))}
                         />
                     </Col>
@@ -104,7 +103,7 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
                             required
                             className={"col-3"}
                             type="text"
-                            value={ingredientsFormData.unit}
+                            value={ingredientsFormData[i]?.unit}
                             onChange={(e) => setIngredientField(i, "unit", e.target.value)}
                         />
                     </Col>

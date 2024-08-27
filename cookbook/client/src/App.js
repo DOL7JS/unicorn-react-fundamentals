@@ -31,6 +31,15 @@ function App() {
             });
         }
     }
+    const handleRecipeDeleted = (recipe) => {
+        console.log("DELETING")
+        if (recipeLoadCall.state === "success") {
+            setRecipeLoadCall({
+                state: "success",
+                data: recipeLoadCall.data.filter((r) => r.id !== recipe.id)
+            });
+        }
+    }
     function getContent() {
         const pendingRequest = recipeLoadCall.state === 'pending' || ingredientLoadCall.state === 'pending';
         const successRequest = recipeLoadCall.state === 'success' && ingredientLoadCall.state === 'success';
@@ -42,7 +51,7 @@ function App() {
         } else if (successRequest) {
             return (<>
                 <Header title={"Best recipes in Unicorn"}/>
-                <RecipeList onComplete={handleRecipeAdded} recipeList={recipeLoadCall.data}
+                <RecipeList onComplete={handleRecipeAdded} onDelete={handleRecipeDeleted} recipeList={recipeLoadCall.data}
                             ingredientList={ingredientLoadCall.data}/>
             </>);
         }

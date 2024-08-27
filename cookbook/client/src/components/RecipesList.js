@@ -130,7 +130,8 @@ function RecipesList(props) {
                 </div>
                 <div className={"d-none d-md-block"}>
                     {isAdmin ?
-                        (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}/>) :
+                        (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}
+                                          onEdit={handleAddRecipeShow} onDelete={props.onDelete}/>) :
                         (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}
                                          isSmallView={smallView} onEdit={handleAddRecipeShow}/>)}
                 </div>

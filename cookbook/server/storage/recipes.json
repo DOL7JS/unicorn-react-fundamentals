@@ -5,7 +5,7 @@
     "imgUri": "https://cdn.vectorstock.com/i/1000x1000/33/49/food-sign-icon-cutlery-symbol-knife-and-fork-vector-10233349.webp",
     "ingredients": [
       {
-        "id": "01ed1245cdfd005a",
+        "id": "e0e1a7f5ccef3dff",
         "amount": 200,
         "unit": "g"
       }
@@ -19,7 +19,7 @@
     "ingredients": [
       {
         "id": "95ff7d609062d4db",
-        "amount": 200,
+        "amount": 196,
         "unit": "g"
       }
     ],
@@ -27,7 +27,7 @@
   },
   {
     "name": "Barbecue burger ze zbylého kuřete",
-    "description": "Rozehřejte troubu na 240 °C. Obrané drůbeží maso natrhejte na vlákna, zamíchejte s barbecue omáčkou a rozprostřete do pekáčku. Dejte do trouby a pečte asi 10 minut. Rozpůlené bulky opečte na rozpálené pánvi na sucho z obou stran. Limetu umyjte, nastrouhejte kůru, šťávu vymačkejte a obojí smíchejte s majonézou. Pomocí škrabky udělejte z mrkve tenké proužky. Přendejte je do misky, přidejte špetku soli a pepře a pár kapek limety a promíchejte. Začněte skládat burger. Obě půlky bulek pomažte limetovou majonézou. Na spodní polovinu bulky navrstvěte natrhaný koriandr, na plátky nasekanou chilli papričku, mrkvové proužky, tenká kolečka šalotky a plátek rajčete. Nakonec přidejte vrstvu zapečeného bbq kuřete a plátek cheddaru. Přiklopte vrchní polovinou bulky a podávejte.",
+    "description": "Rozehřejte troubu na 1000 °C. Obrané drůbeží maso natrhejte na vlákna, zamíchejte s barbecue omáčkou a rozprostřete do pekáčku. Dejte do trouby a pečte asi 10 minut. Rozpůlené bulky opečte na rozpálené pánvi na sucho z obou stran. Limetu umyjte, nastrouhejte kůru, šťávu vymačkejte a obojí smíchejte s majonézou. Pomocí škrabky udělejte z mrkve tenké proužky. Přendejte je do misky, přidejte špetku soli a pepře a pár kapek limety a promíchejte. Začněte skládat burger. Obě půlky bulek pomažte limetovou majonézou. Na spodní polovinu bulky navrstvěte natrhaný koriandr, na plátky nasekanou chilli papričku, mrkvové proužky, tenká kolečka šalotky a plátek rajčete. Nakonec přidejte vrstvu zapečeného bbq kuřete a plátek cheddaru. Přiklopte vrchní polovinou bulky a podávejte.",
     "imgUri": "https://cdn.vectorstock.com/i/1000x1000/33/49/food-sign-icon-cutlery-symbol-knife-and-fork-vector-10233349.webp",
     "ingredients": [
       {
@@ -469,72 +469,6 @@
     "id": "7f2c57b5dcc326ba"
   },
   {
-    "name": "třetí",
-    "description": "descc",
-    "ingredients": [
-      {
-        "id": "defe5185b23ca985",
-        "amount": 3,
-        "unit": "lžíce"
-      },
-      {
-        "amount": 2,
-        "id": "3f702872fb8e99f8",
-        "unit": "šptk"
-      },
-      {
-        "amount": 1,
-        "id": "cd99517791018390",
-        "unit": "ks"
-      }
-    ],
-    "id": "916ce518f0abe458"
-  },
-  {
-    "name": "44",
-    "description": "4444",
-    "ingredients": [
-      {
-        "id": "defe5185b23ca985",
-        "amount": 1,
-        "unit": "a"
-      },
-      {
-        "amount": 2,
-        "id": "3f702872fb8e99f8",
-        "unit": "b"
-      },
-      {
-        "amount": 4,
-        "id": "cd99517791018390",
-        "unit": "c"
-      }
-    ],
-    "id": "dc85ecfbdd8253d6"
-  },
-  {
-    "name": "1",
-    "description": "1",
-    "ingredients": [
-      {
-        "id": "9416b19e1bd2cd11",
-        "amount": 1,
-        "unit": "a"
-      },
-      {
-        "id": "9416b19e1bd2cd11",
-        "amount": 1,
-        "unit": "a"
-      },
-      {
-        "id": "d8e6bbd4d6038494",
-        "amount": 1,
-        "unit": "a"
-      }
-    ],
-    "id": "ef48ba0fca35f1a7"
-  },
-  {
     "name": "123",
     "description": "123",
     "ingredients": [
@@ -577,28 +511,6 @@
       }
     ],
     "id": "7bf06fd711099722"
-  },
-  {
-    "name": "qqq",
-    "description": "qqq",
-    "ingredients": [
-      {
-        "id": "e0e1a7f5ccef3dff",
-        "amount": 1,
-        "unit": "ss"
-      },
-      {
-        "id": "426371a4bbc275f1",
-        "amount": 2,
-        "unit": "ss"
-      },
-      {
-        "id": "9416b19e1bd2cd11",
-        "amount": 3,
-        "unit": "ss"
-      }
-    ],
-    "id": "7b70cd9aae4f0896"
   },
   {
     "name": "asas",

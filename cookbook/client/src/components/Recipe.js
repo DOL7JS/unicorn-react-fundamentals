@@ -50,7 +50,8 @@ function Recipe(props) {
                                 props.onEdit(props.recipe)
                                 console.log(props.recipe)
                             }}
-                        /> </Col>
+                        />
+                    </Col>
                 </Row>
 
                 <Card.Title className={recipeStyle.recipeTitle}>{props.recipe.name}</Card.Title>
