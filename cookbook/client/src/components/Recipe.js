@@ -3,8 +3,8 @@ import recipeStyle from "../css/Recipe.module.css"
 import Icon from "@mdi/react";
 import {mdiFoodForkDrink, mdiPencilOutline} from "@mdi/js";
 import IngredientList from "./IngredientList";
-import {useState} from "react";
-
+import {useContext, useState} from "react";
+import UserContext from "../UserProvider";
 
 function Recipe(props) {
 
@@ -12,7 +12,7 @@ function Recipe(props) {
     const descriptionStyle = props.isSmallView ? recipeStyle.description.concat(' ', recipeStyle.descriptionSmall) : recipeStyle.description;
     const [showIngredients, setShowIngredients] = useState(false);
     const buttonStyle = showIngredients ? "btn-secondary" : "btn-primary";
-
+    const {isAuthorized} = useContext(UserContext);
     function getIngredientsButton() {
         return <>{!props.isSmallView &&
             <Button className={recipeStyle.ingredientButton.concat(' ', buttonStyle)} onClick={() => {
@@ -42,15 +42,17 @@ function Recipe(props) {
                         <Icon path={mdiFoodForkDrink} size={1}/>
                     </Col>
                     <Col>
-                        <Icon
-                            size={0.8}
-                            path={mdiPencilOutline}
-                            style={{color: 'orange', cursor: 'pointer'}}
-                            onClick={(e) => {
-                                props.onEdit(props.recipe)
-                                console.log(props.recipe)
-                            }}
-                        />
+                        {isAuthorized &&
+                            <Icon
+                                size={0.8}
+                                path={mdiPencilOutline}
+                                style={{color: 'orange', cursor: 'pointer'}}
+                                onClick={(e) => {
+                                    props.onEdit(props.recipe)
+                                    console.log(props.recipe)
+                                }}
+                            />}
+
                     </Col>
                 </Row>
 

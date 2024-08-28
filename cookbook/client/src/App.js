@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./components/Header";
 import RecipeList from "./components/RecipesList";
 import {useEffect, useState} from "react";
-import {getErrorPage, getPendingPage} from "./utils/Common";
+import {getErrorPage, getPendingPage, sortRecipeByName} from "./utils/Common";
 import {fetchIngredientList, fetchRecipeList} from "./utils/Connection";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             }
             setRecipeLoadCall({
                 state: "success",
-                data: [...recipeList, recipe]
+                data: [...recipeList, recipe].sort(sortRecipeByName)
             });
         }
     }
@@ -36,7 +36,7 @@ function App() {
         if (recipeLoadCall.state === "success") {
             setRecipeLoadCall({
                 state: "success",
-                data: recipeLoadCall.data.filter((r) => r.id !== recipe.id)
+                data: recipeLoadCall.data.filter((r) => r.id !== recipe.id).sort(sortRecipeByName)
             });
         }
     }
@@ -51,7 +51,9 @@ function App() {
         } else if (successRequest) {
             return (<>
                 <Header title={"Best recipes in Unicorn"}/>
-                <RecipeList onComplete={handleRecipeAdded} onDelete={handleRecipeDeleted} recipeList={recipeLoadCall.data}
+                <RecipeList onComplete={handleRecipeAdded}
+                            onDelete={handleRecipeDeleted}
+                            recipeList={recipeLoadCall.data}
                             ingredientList={ingredientLoadCall.data}/>
             </>);
         }

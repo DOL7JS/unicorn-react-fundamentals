@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import Icon from "@mdi/react";
 import {mdiMinus, mdiPlus} from "@mdi/js";
 import ingredientStyle from "../css/Ingredient.module.css"
+import {fetchCreateUpdateRecipe} from "../utils/Connection";
 
 function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
     const [validated, setValidated] = useState(false);
@@ -41,6 +42,7 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
         )
     }
     const minusNoIngredients = () => {
+        const val = noIngredients;
         setNoIngredients((value) => {
                 if (value > 1) {
                     return value - 1
@@ -48,6 +50,8 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
                 return value;
             }
         )
+        const newArray = ingredientsFormData.filter((_, index) => index !== (val - 1));
+        setIngredientsFormData(newArray);
     }
     useEffect(() => {
         if (recipe) {
@@ -61,6 +65,8 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
     }, [recipe]);
     const ingredientList = () => {
         const options = [];
+        console.log(noIngredients);
+        console.log(ingredientsFormData);
         for (let i = 0; i < noIngredients; i++) {
             options.push(<Row className={"mt-1"}>
                     <Col
@@ -116,10 +122,8 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
         const form = e.currentTarget;
         e.preventDefault();
         e.stopPropagation();
-        console.log(ingredientsFormData)
 
         const ingredientsArray = Object.values(ingredientsFormData);
-        console.log(ingredientsArray)
 
         const payload = {
             id: recipe ? recipe.id : null,
@@ -132,30 +136,9 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
         }
 
         setAddRecipeCall({state: 'pending'});
-        const res = await fetch(`http://localhost:3000/recipe/${recipe ? 'update' : 'create'}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload)
-        });
-
-        const data = await res.json();
-
-        if (res.status >= 400) {
-            setAddRecipeCall({state: "error", error: data});
-        } else {
-            setAddRecipeCall({state: "success", data});
-            if (typeof onComplete === 'function') {
-                onComplete(data);
-            }
-            handleClose();
-        }
-
-
+        fetchCreateUpdateRecipe(setAddRecipeCall, onComplete, handleClose, recipe, payload);
     };
     const handleClose = () => {
-        console.log("Close form")
         setAddRecipeShow({state: false, data: null})
         setRecipeFormData(defaultFormData);
         setIngredientsFormData([]);

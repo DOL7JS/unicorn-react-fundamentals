@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Table from "react-bootstrap/Table";
 import recipeStyle from "../css/RecipeTable.module.css"
 import Icon from "@mdi/react";
 import {mdiPencilOutline} from "@mdi/js";
-import RecipeDelete from "./RecipeDelete";
 import {Alert} from "react-bootstrap";
+import UserContext from "../UserProvider";
+import RecipeDelete from "./RecipeDelete";
 
 function RecipeTableList(props) {
-
+    const {isAuthorized} = useContext(UserContext);
     const [deleteRecipeError, setDeleteRecipeError] = useState('');
     return (
         <>
@@ -31,20 +32,25 @@ function RecipeTableList(props) {
                         <td className={recipeStyle.recipeTableLeftAlign}>{recipe.name}</td>
                         <td className={recipeStyle.recipeTableLeftAlign}>{recipe.description}</td>
                         <td>{recipe.ingredients.length}</td>
-                        <Icon
-                            size={2}
-                            path={mdiPencilOutline}
-                            style={{color: 'orange', cursor: 'pointer'}}
-                            onClick={(e) => {
-                                props.onEdit(recipe)
-                                console.log(recipe)
-                            }}
-                        />
-                        <RecipeDelete
-                            recipe={recipe}
-                            onError={(error) => setDeleteRecipeError(error)}
-                            onDelete={(id) => props.onDelete(id)}
-                        />
+                        {isAuthorized &&
+                            <>
+                                <Icon
+                                    size={2}
+                                    path={mdiPencilOutline}
+                                    style={{color: 'orange', cursor: 'pointer'}}
+                                    onClick={(e) => {
+                                        props.onEdit(recipe)
+                                        console.log(recipe)
+                                    }}
+                                />
+                                <RecipeDelete
+                                    recipe={recipe}
+                                    onError={(error) => setDeleteRecipeError(error)}
+                                    onDelete={(id) => props.onDelete(id)}
+                                />
+                            </>
+                        }
+
 
                     </tr>
                 );

@@ -2,6 +2,7 @@ import {useState} from "react";
 import Icon from "@mdi/react";
 import {mdiTrashCanOutline} from "@mdi/js";
 import Confirmation from "./Confirmation";
+import {fetchDeleteRecipe} from "../utils/Connection";
 
 export default function RecipeDelete({ recipe, onDelete, onError }) {
     const [deleteRecipeCall, setDeleteRecipeCall] = useState({
@@ -11,32 +12,7 @@ export default function RecipeDelete({ recipe, onDelete, onError }) {
     const handleDelete = async () => {
         if (deleteRecipeCall.state === 'pending')
             return
-
-        setDeleteRecipeCall({ state: 'pending' });
-
-        const res = await fetch(`http://localhost:3000/recipe/delete`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: recipe.id })
-        });
-
-        const data = await res.json();
-
-        if (res.status >= 400) {
-            setDeleteRecipeCall({ state: 'error', error: data });
-
-            if (typeof onError === 'function')
-                onError(data.errorMessage);
-
-        } else {
-            setDeleteRecipeCall({ state: 'success', data });
-
-            if (typeof onDelete === 'function') {
-                onDelete(recipe.id);
-            }
-        }
+        fetchDeleteRecipe(setDeleteRecipeCall,onDelete, onError, recipe.id);
     }
 
     return (

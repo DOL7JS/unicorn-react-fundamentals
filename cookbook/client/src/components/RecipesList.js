@@ -1,16 +1,18 @@
 import {Button, Form, Navbar} from "react-bootstrap";
 import Icon from "@mdi/react";
 import {mdiMagnify, mdiMinus, mdiPlus} from "@mdi/js";
-import {useMemo, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import RecipeTableList from "./RecipeTableList";
 import RecipeGridList from "./RecipeGridList";
 import headerStyle from "../css/Header.module.css"
 import RecipeForm from "./RecipeForm";
+import UserContext from "../UserProvider";
 
 function RecipesList(props) {
     const [smallView, setSmallView] = useState(true);
     const [searchBy, setSearchBy] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdminView, setIsAdminView] = useState(false);
+    const {isAuthorized, setIsAuthorized} = useContext(UserContext);
     const [addRecipeShow, setAddRecipeShow] = useState({
         state: false
     });
@@ -64,16 +66,19 @@ function RecipesList(props) {
 
     function getMenuBar() {
         return <Form inline className={headerStyle.form.concat(' ', "d-flex")}>
-            <Button
-                style={{float: "right"}}
-                variant="secondary"
-                class="btn btn-success btn-sm"
-                onClick={() => handleAddRecipeShow(null)}
-            >
-                <Icon path={mdiPlus} size={1}/>
-                Recipe
-            </Button>
-                {!isAdmin &&
+            {isAuthorized &&
+                <Button
+                    style={{float: "right"}}
+                    variant="secondary"
+                    class="btn btn-success btn-sm"
+                    onClick={() => handleAddRecipeShow(null)}
+                >
+                    <Icon path={mdiPlus} size={1}/>
+                    Recipe
+                </Button>
+            }
+
+            {!isAdminView &&
                     <><Button
                         style={{marginTop: "10px"}}
                         className={"w-100 d-sm-none"}
@@ -98,11 +103,19 @@ function RecipesList(props) {
                     <Button
                         className={"d-none d-md-block"}
                         variant="outline-primary"
-                        onClick={() => setIsAdmin((currentState) => {
+                        onClick={() => setIsAdminView((currentState) => {
                             return !currentState
                         })}>
-                        {isAdmin ? 'User view' : 'Admin view'}
+                        {isAdminView ? 'User view' : 'Admin view'}
                     </Button>
+            <Button
+                className={"d-none d-md-block"}
+                variant="outline-primary"
+                onClick={() => setIsAuthorized((currentState) => {
+                    return !currentState
+                })}>
+                {isAuthorized ? 'Log out' : 'Log in'}
+            </Button>
         </Form>;
     }
 
@@ -129,7 +142,7 @@ function RecipesList(props) {
                                     isSmallView={smallView}/>
                 </div>
                 <div className={"d-none d-md-block"}>
-                    {isAdmin ?
+                    {isAdminView ?
                         (<RecipeTableList recipeList={filteredRecipeList} isSmallView={smallView}
                                           onEdit={handleAddRecipeShow} onDelete={props.onDelete}/>) :
                         (<RecipeGridList recipeList={filteredRecipeList} ingredientList={props.ingredientList}

@@ -12,7 +12,13 @@ export function getErrorPage(recipeLoadCall) {
         </div>
     </>;
 }
-
+export function sortRecipeByName(recipeA, recipeB){
+    let x = recipeA.name.toLowerCase();
+    let y = recipeB.name.toLowerCase();
+    if (x < y) {return -1;}
+    if (x > y) {return 1;}
+    return 0;
+}
 export function getPendingPage() {
     return <>
         <div className={styles.loading}>

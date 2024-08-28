@@ -3,7 +3,7 @@ import React from 'react';
 
 function RecipeDetail() {
     return (
-        <h1>Detail jak bič</h1>
+        <h1 data-testid="recipe-detail-title">Detail</h1>
     );
 }
 

@@ -26,7 +26,7 @@
     "id": "854f2f3cb8954916"
   },
   {
-    "name": "Barbecue burger ze zbylého kuřete",
+    "name": "fBarbecue burger ze zbylého kuřete",
     "description": "Rozehřejte troubu na 1000 °C. Obrané drůbeží maso natrhejte na vlákna, zamíchejte s barbecue omáčkou a rozprostřete do pekáčku. Dejte do trouby a pečte asi 10 minut. Rozpůlené bulky opečte na rozpálené pánvi na sucho z obou stran. Limetu umyjte, nastrouhejte kůru, šťávu vymačkejte a obojí smíchejte s majonézou. Pomocí škrabky udělejte z mrkve tenké proužky. Přendejte je do misky, přidejte špetku soli a pepře a pár kapek limety a promíchejte. Začněte skládat burger. Obě půlky bulek pomažte limetovou majonézou. Na spodní polovinu bulky navrstvěte natrhaný koriandr, na plátky nasekanou chilli papričku, mrkvové proužky, tenká kolečka šalotky a plátek rajčete. Nakonec přidejte vrstvu zapečeného bbq kuřete a plátek cheddaru. Přiklopte vrchní polovinou bulky a podávejte.",
     "imgUri": "https://cdn.vectorstock.com/i/1000x1000/33/49/food-sign-icon-cutlery-symbol-knife-and-fork-vector-10233349.webp",
     "ingredients": [
@@ -142,16 +142,6 @@
         "id": "3f702872fb8e99f8",
         "amount": 1,
         "unit": "špetka"
-      },
-      {
-        "id": "cd99517791018390",
-        "amount": 1,
-        "unit": "špetka"
-      },
-      {
-        "id": "53dae6e5a0076b15",
-        "amount": 1,
-        "unit": "ks"
       }
     ],
     "id": "2dd281dff25fe765"
@@ -467,28 +457,6 @@
       }
     ],
     "id": "7f2c57b5dcc326ba"
-  },
-  {
-    "name": "123",
-    "description": "123",
-    "ingredients": [
-      {
-        "id": "95ff7d609062d4db",
-        "amount": 1,
-        "unit": "a"
-      },
-      {
-        "id": "9416b19e1bd2cd11",
-        "amount": 1,
-        "unit": "c"
-      },
-      {
-        "id": "defe5185b23ca985",
-        "amount": 1,
-        "unit": "b"
-      }
-    ],
-    "id": "954c2abb396355c4"
   },
   {
     "name": "666",
