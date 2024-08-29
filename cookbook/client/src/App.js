@@ -21,6 +21,7 @@ function App() {
 
     const handleRecipeAdded = (recipe) => {
         if (recipeLoadCall.state === "success") {
+            console.log("fetch recipes")
             let recipeList = [...recipeLoadCall.data];
             if (recipe.id) {
                 recipeList = recipeList.filter((r) => r.id !== recipe.id);
@@ -31,12 +32,11 @@ function App() {
             });
         }
     }
-    const handleRecipeDeleted = (recipe) => {
-        console.log("DELETING")
+    const handleRecipeDeleted = (recipeId) => {
         if (recipeLoadCall.state === "success") {
             setRecipeLoadCall({
                 state: "success",
-                data: recipeLoadCall.data.filter((r) => r.id !== recipe.id).sort(sortRecipeByName)
+                data: recipeLoadCall.data.filter((r) => r.id !== recipeId).sort(sortRecipeByName)
             });
         }
     }

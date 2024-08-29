@@ -1,0 +1,24 @@
+.navigatorRecipeList{
+
+}
+
+.navigator {
+    margin-right: 16px;
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 576px) {
+    .navigator {
+        justify-content: center;
+        align-items: center;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .navigator .btn {
+        margin-top: 8px;
+        width: 80%;
+        text-align: center;
+    }
+}

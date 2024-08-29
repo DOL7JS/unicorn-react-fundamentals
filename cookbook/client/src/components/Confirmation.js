@@ -26,7 +26,7 @@ export default function Confirmation({ title, message, confirmText, onConfirm, c
                         variant='light'
                         onClick={handleClose}
                     >
-                        Zrušit
+                        Cancel
                     </Button>
                 </div>
             </Popover.Body>

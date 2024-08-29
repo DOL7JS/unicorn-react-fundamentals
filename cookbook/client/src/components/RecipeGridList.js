@@ -13,12 +13,13 @@ function RecipeGridList(props) {
             };
         });
                 return (
-                    <div className={"col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"}
+                    <div  key={recipe.id}  className={"col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex align-items-stretch"}
                          style={{paddingBottom: "16px"}}
                     >
                         <Recipe key={recipe.id} recipe={recipe} ingredients={mergedIngredients}
                                 isSmallView={props.isSmallView} onEdit={props.onEdit}/>
-                    </div>)
+                    </div>
+                )
 
             })}
         </div>)

@@ -10,7 +10,7 @@
     margin: 10px 10px 10px 10px;
     padding: 10px;
     transition: box-shadow 0.3s ease;
-    max-width: 500px;
+    width: 100%;
 }
 .descriptionSmall{
     white-space: nowrap;
@@ -48,5 +48,5 @@ img:hover {
 .recipeSmall{
     overflow: hidden;
     height: 450px;
-    width: auto;
+    width: 100%;
 }

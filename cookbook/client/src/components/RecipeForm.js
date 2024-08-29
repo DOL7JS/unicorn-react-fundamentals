@@ -55,7 +55,6 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
     }
     useEffect(() => {
         if (recipe) {
-            console.log(recipe)
             setRecipeFormData({name: recipe.name, description: recipe.description})
             setIngredientsFormData(recipe.ingredients)
             setNoIngredients(recipe.ingredients?.length > 0 ? recipe.ingredients?.length : noIngredients)
@@ -65,10 +64,8 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
     }, [recipe]);
     const ingredientList = () => {
         const options = [];
-        console.log(noIngredients);
-        console.log(ingredientsFormData);
         for (let i = 0; i < noIngredients; i++) {
-            options.push(<Row className={"mt-1"}>
+            options.push(<Row key={'row-key-'.concat(i.toString())} className={"mt-1"}>
                     <Col
                         className={"col-6"}
                     >
@@ -180,7 +177,8 @@ function RecipeForm({show, setAddRecipeShow, ingredients, onComplete, recipe}) {
                     <Form.Group>
                         <Row>
                             <Col><Form.Label>Ingredients</Form.Label></Col>
-                            <Col className={"col-2"}><Button
+                            <Col className={"col-2 justify-content-end"}>
+                                <Button
                                 className={ingredientStyle.ingredientButton}
                                 onClick={plusNoIngredients}><Icon size={1}
                                                                   path={mdiPlus}></Icon></Button>

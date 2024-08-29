@@ -55,6 +55,22 @@ export function fetchDeleteRecipe(setDeleteRecipeCall, onDelete, onError, id) {
     });
 }
 
+export function fetchRecipe(setRecipeLoadCall,recipeId){
+    setRecipeLoadCall({
+        state: "pending",
+    });
+    fetch(`http://localhost:3000/recipe/get?id=${recipeId}`, {
+        method: "GET",
+    }).then(async (response) => {
+        const responseJson = await response.json();
+        if (response.status >= 400) {
+            setRecipeLoadCall({state: "error", error: responseJson});
+        } else {
+            setRecipeLoadCall({state: "success", data: responseJson});
+        }
+    });
+}
+
 export function fetchCreateUpdateRecipe(setAddRecipeCall,onComplete,handleClose,recipe, payload) {
     fetch(`http://localhost:3000/recipe/${recipe ? 'update' : 'create'}`, {
         method: "POST",

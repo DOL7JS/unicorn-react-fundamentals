@@ -5,9 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import IngredientList from "./components/IngredientList";
-import RecipesList from "./components/RecipesList";
 import RecipeDetail from "./components/RecipeDetail";
 import {UserProvider} from "./UserProvider";
+import Home from "./components/Home";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,9 +16,9 @@ root.render(
           <BrowserRouter>
               <Routes>
                   <Route path="/">
-                      <Route path="" element={<App/>}/>
-                      <Route path="home" element={<App/>}/>
-                      <Route path="recipeList" element={<RecipesList/>}/>
+                      <Route path="" element={<Home/>}/>
+                      <Route path="home" element={<Home/>}/>
+                      <Route path="recipeList" element={<App/>}/>
                       <Route path="recipeDetail" element={<RecipeDetail/>}/>
                       <Route path="ingredientList" element={<IngredientList/>}/>
                   </Route>

@@ -17,16 +17,16 @@ export default function RecipeDelete({ recipe, onDelete, onError }) {
 
     return (
         <Confirmation
-            title="Smazat známku"
-            message="Opravdu si přejete smazat známku?"
-            confirmText="Smazat"
+            title="Delete recipe"
+            message="Are you sure?"
+            confirmText="Delete"
             onConfirm={handleDelete}
         >
             <div>
                 <Icon
                     path={mdiTrashCanOutline}
                     style={{ cursor: 'pointer', color: 'red' }}
-                    size={0.8}
+                    size={1}
                 ></Icon>
             </div>
         </Confirmation>
